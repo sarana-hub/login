@@ -8,7 +8,9 @@ import org.springframework.mock.web.MockHttpServletResponse;
 import static org.assertj.core.api.Assertions.*;
 
 class SessionManagerTest {
+
     SessionManager sessionManager = new SessionManager();
+
     @Test
     void sessionTest() {
         //세션 생성
