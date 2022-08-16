@@ -5,9 +5,9 @@
 ### hello.login
 
 #### domain
-##### item
-##### member
-##### login
+- item
+- member
+- login
 
 #### web
 ##### item
