@@ -17,7 +17,7 @@ public class TestDataInit {
     private final MemberRepository memberRepository;
 
     /**
-     * 테스트용 데이터 추가
+     * 회원용 테스트 데이터 추가
      */
     @PostConstruct
     public void init() {

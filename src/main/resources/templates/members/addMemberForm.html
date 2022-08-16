@@ -14,6 +14,8 @@
  }
  </style>
 </head>
+
+<!-- 회원 가입 뷰 템플릿 -->
 <body>
 <div class="container">
     <div class="py-5 text-center">
@@ -27,7 +29,7 @@
         </div>
         <div>
             <label for="loginId">로그인 ID</label>
-            <input type="text" id="loginId" th:field="*{loginId}" class="formcontrol"
+            <input type="text" id="loginId" th:field="*{loginId}" class="form-control"
                    th:errorclass="field-error">
             <div class="field-error" th:errors="*{loginId}" />
         </div>
@@ -40,7 +42,7 @@
         </div>
         <div>
             <label for="name">이름</label>
-            <input type="text" id="name" th:field="*{name}" class="formcontrol"
+            <input type="text" id="name" th:field="*{name}" class="form-control"
                    th:errorclass="field-error">
             <div class="field-error" th:errors="*{name}" />
         </div>

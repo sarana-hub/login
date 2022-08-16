@@ -16,16 +16,17 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 @RequestMapping("/members")
 public class MemberController {
-    private final MemberRepository memberRepository;
+    private final MemberRepository memberRepository;    //의존관계 주입받기
 
     @GetMapping("/add")
     public String addForm(@ModelAttribute("member") Member member) {
+
         return "members/addMemberForm";
     }
 
     @PostMapping("/add")
-    public String save(@Valid @ModelAttribute Member member, BindingResult result) {
-        if (result.hasErrors()) {
+    public String save(@Valid @ModelAttribute Member member, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
             return "members/addMemberForm";
         }
         memberRepository.save(member);

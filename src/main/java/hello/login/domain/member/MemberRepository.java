@@ -22,24 +22,26 @@ public class MemberRepository {
     }
 
     public Member findById(Long id) {
+
         return store.get(id);
     }
 
-    public Optional<Member> findByLoginId(String loginId) {
-        /*List<Member> all=findAll();
+    public Optional<Member> findByLoginId(String loginId) { //로그인 id로 찾기
+        List<Member> all=findAll();
         for (Member m:all){
             if (m.getLoginId().equals(loginId)){
-                return Optional.of(m);
+                return Optional.of(m);  //m
             }
         }
-        return Optional.empty();*/
+        return Optional.empty();    //null
         /** == */
-        return findAll().stream()
+        /*return findAll().stream()
                 .filter(m -> m.getLoginId().equals(loginId))
-                .findFirst();
+                .findFirst();*/
     }
 
     public List<Member> findAll() {
+
         return new ArrayList<>(store.values());
     }
 
