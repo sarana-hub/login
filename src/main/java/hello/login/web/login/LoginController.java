@@ -66,7 +66,7 @@ public class LoginController {
         response.addCookie(cookie);
     }
 
-    @PostMapping("/login")
+    //@PostMapping("/login")
     public String loginV2(@Valid @ModelAttribute LoginForm form, BindingResult bindingResult, HttpServletResponse response) {
         if (bindingResult.hasErrors()) {
             return "login/loginForm";
@@ -85,13 +85,13 @@ public class LoginController {
         //세션 관리자를 통해 세션을 생성하고, 세션에 회원 데이터(loginMember)를 저장해두고, 쿠키도 함께 발행
         return "redirect:/";
     }
-    @PostMapping("/logout")
+    //@PostMapping("/logout")
     public String logoutV2(HttpServletRequest request) {
         sessionManager.expire(request);     //로그아웃시 해당 세션의 정보를 제거
         return "redirect:/";
     }
 
-    //@PostMapping("/login")
+    @PostMapping("/login")
     public String loginV3(@Valid @ModelAttribute LoginForm form, BindingResult bindingResult, HttpServletRequest request) {
         if (bindingResult.hasErrors()) {
             return "login/loginForm";
@@ -106,20 +106,19 @@ public class LoginController {
         }
 
         //로그인 성공 처리
+
         //세션이 있으면 있는 세션 반환, 없으면 신규 세션 생성
         HttpSession session = request.getSession();
         //세션에 로그인 회원 정보 보관
         session.setAttribute(SessionConst.LOGIN_MEMBER, loginMember);
-
         return "redirect:/";
     }
 
-    //@PostMapping("/logout")
+    @PostMapping("/logout")
     public String logoutV3(HttpServletRequest request) {
-        //세션을 삭제
         HttpSession session = request.getSession(false);
         if (session != null) {
-            session.invalidate();
+            session.invalidate();   //세션을 삭제
         }
         return "redirect:/";
     }

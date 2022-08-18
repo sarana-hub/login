@@ -12,6 +12,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * 세션 관리
+ * 서블릿이 제공하는 HttpSession도 여기 SessionManager와 같은 방식으로 동작
  */
 @Component
 public class SessionManager {
