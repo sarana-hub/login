@@ -15,6 +15,8 @@ class SessionManagerTest {
     void sessionTest() {
         //세션 생성
         MockHttpServletResponse response = new MockHttpServletResponse();
+        //여기서는 HttpServletRequest , HttpservletResponse 객체를 직접 사용할 수 없기 때문에
+        // 테스트에서 비슷한 역할을 해주는 가짜 MockHttpServletRequest, MockHttpServletResponse를 사용
         Member member = new Member();
         sessionManager.createSession(member, response);
 
