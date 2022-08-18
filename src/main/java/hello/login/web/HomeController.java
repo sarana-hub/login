@@ -62,7 +62,7 @@ public class HomeController {
     }
 
 
-    @GetMapping("/")
+    //@GetMapping("/")
     public String homeLoginV3(HttpServletRequest request, Model model) {
         HttpSession session=request.getSession(false);
         //로그인 하지 않을 사용자도 의미없는 세션이 만들어지지않게
@@ -82,8 +82,8 @@ public class HomeController {
         return "loginHome";
     }
 
-    //@GetMapping("/")
-    public String homeLoginV3Spring(
+    @GetMapping("/")
+    public String homeLoginV3Spring(    //@SessionAttribute로 이미 로그인 된 사용자 찾기
             @SessionAttribute(name=SessionConst.LOGIN_MEMBER, required = false) Member loginMember, Model model) {
 
         //세션에 회원 데이터가 없으면 home
