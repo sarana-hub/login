@@ -27,7 +27,7 @@ public class HomeController {
         return "home";
     }
 
-    @GetMapping("/")
+    //@GetMapping("/")
     public String homeLogin(@CookieValue(name = "memberId", required = false) Long memberId, Model model) {
         //로그인 하지 않은 사용자도 홈에 접근할 수 있기 때문에 required = false 를 사용
 
@@ -47,14 +47,14 @@ public class HomeController {
     }
 
 
-    //@GetMapping("/")
+    @GetMapping("/")
     public String homeLoginV2(HttpServletRequest request, Model model) {
         //세션 관리자에 저장된 회원 정보 조회
         Member member = (Member)sessionManager.getSession(request);
 
         //로그인
-        if (member == null) {
-            return "home";
+        if (member == null) {   //만약 회원 정보가 없으면, 쿠키나 세션이 없는 것 이므로
+            return "home";      //로그인 되지 않은 것으로 처리
         }
 
         model.addAttribute("member", member);

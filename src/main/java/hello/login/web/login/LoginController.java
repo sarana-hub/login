@@ -32,7 +32,7 @@ public class LoginController {
         return "login/loginForm";
     }
 
-    @PostMapping("/login")
+    //@PostMapping("/login")
     public String login(@Valid @ModelAttribute LoginForm form, BindingResult bindingResult, HttpServletResponse response) {
         if (bindingResult.hasErrors()) {
             return "login/loginForm";
@@ -55,7 +55,7 @@ public class LoginController {
         return "redirect:/";    //홈 화면으로 이동
     }
 
-    @PostMapping("/logout")
+    //@PostMapping("/logout")
     public String logout(HttpServletResponse response) {
         expireCookie(response, "memberId");
         return "redirect:/";
@@ -66,9 +66,8 @@ public class LoginController {
         response.addCookie(cookie);
     }
 
-    //@PostMapping("/login")
-    public String loginV2(@Valid @ModelAttribute LoginForm form, BindingResult bindingResult,
-                        HttpServletResponse response) {
+    @PostMapping("/login")
+    public String loginV2(@Valid @ModelAttribute LoginForm form, BindingResult bindingResult, HttpServletResponse response) {
         if (bindingResult.hasErrors()) {
             return "login/loginForm";
         }
@@ -82,20 +81,18 @@ public class LoginController {
         }
 
         //로그인 성공 처리
-        //세션 관리자를 통해 세션을 생성하고, 회원 데이터 보관
         sessionManager.createSession(loginMember, response);
+        //세션 관리자를 통해 세션을 생성하고, 세션에 회원 데이터(loginMember)를 저장해두고, 쿠키도 함께 발행
         return "redirect:/";
     }
-
-    //@PostMapping("/logout")
+    @PostMapping("/logout")
     public String logoutV2(HttpServletRequest request) {
-        sessionManager.expire(request);
+        sessionManager.expire(request);     //로그아웃시 해당 세션의 정보를 제거
         return "redirect:/";
     }
 
     //@PostMapping("/login")
-    public String loginV3(@Valid @ModelAttribute LoginForm form, BindingResult bindingResult,
-                          HttpServletRequest request) {
+    public String loginV3(@Valid @ModelAttribute LoginForm form, BindingResult bindingResult, HttpServletRequest request) {
         if (bindingResult.hasErrors()) {
             return "login/loginForm";
         }
