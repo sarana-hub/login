@@ -42,18 +42,20 @@ public class WebConfig implements WebMvcConfigurer {
     @Bean
     public FilterRegistrationBean logFilter() {
         FilterRegistrationBean<Filter> filterRegistrationBean = new FilterRegistrationBean<>();
-        filterRegistrationBean.setFilter(new LogFilter());      //등록할 필터를 지정
+        filterRegistrationBean.setFilter(new LogFilter());      //필터를 등록
         filterRegistrationBean.setOrder(1);     //필터는 체인으로 동작하므로, 순서가 필요
-        filterRegistrationBean.addUrlPatterns("/*");    //필터를 적용할 URL패턴을 지정
+
+        //필터를 적용할 URL패턴을 지정
+        filterRegistrationBean.addUrlPatterns("/*");    //모든 요청에 로그인 필터를 적용
 
         return filterRegistrationBean;
     }
 
-    //@Bean
+    @Bean
     public FilterRegistrationBean loginCheckFilter() {
         FilterRegistrationBean<Filter> filterRegistrationBean = new FilterRegistrationBean<>();
         filterRegistrationBean.setFilter(new LoginCheckFilter());
-        filterRegistrationBean.setOrder(2);
+        filterRegistrationBean.setOrder(2);     //순서 2번
         filterRegistrationBean.addUrlPatterns("/*");
 
         return filterRegistrationBean;

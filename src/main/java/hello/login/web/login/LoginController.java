@@ -91,7 +91,7 @@ public class LoginController {
         return "redirect:/";
     }
 
-    @PostMapping("/login")
+    //@PostMapping("/login")
     public String loginV3(@Valid @ModelAttribute LoginForm form, BindingResult bindingResult, HttpServletRequest request) {
         if (bindingResult.hasErrors()) {
             return "login/loginForm";
@@ -114,7 +114,7 @@ public class LoginController {
         return "redirect:/";
     }
 
-    @PostMapping("/logout")
+    //@PostMapping("/logout")
     public String logoutV3(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         if (session != null) {
@@ -125,8 +125,9 @@ public class LoginController {
 
     /**
      * 로그인 이후 redirect 처리
+     * 로그인에 성공하면 처음 요청한 URL로 이동
      */
-    //@PostMapping("/login")
+    @PostMapping("/login")
     public String loginV4(@Valid @ModelAttribute LoginForm form, BindingResult bindingResult,
                           @RequestParam(defaultValue = "/") String redirectURL, HttpServletRequest request) {
         if (bindingResult.hasErrors()) {
@@ -141,12 +142,13 @@ public class LoginController {
             return "login/loginForm";
         }
 
-        //로그인 성공 처리
+        /*로그인 성공 처리*/
         //세션이 있으면 있는 세션 반환, 없으면 신규 세션 생성
         HttpSession session = request.getSession();
         //세션에 로그인 회원 정보 보관
         session.setAttribute(SessionConst.LOGIN_MEMBER, loginMember);
 
-        return "redirect:"+redirectURL;
+        //redirectURL 적용
+        return "redirect:"+redirectURL;     //로그인 성공시 해당 경로(로그인 체크 필터의)로 고객을 redirect
     }
 }
