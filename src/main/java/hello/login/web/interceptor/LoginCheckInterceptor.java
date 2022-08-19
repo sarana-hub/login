@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 @Slf4j
 public class LoginCheckInterceptor implements HandlerInterceptor {
+    //인증은 컨트롤러 호출 전에만 호출되면 된다 ->preHandle만 구현
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String requestURI = request.getRequestURI();

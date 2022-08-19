@@ -29,7 +29,7 @@ public class WebConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new LogInterceptor())   //인터셉터를 등록
                 .order(1)   //인터셉터의 호출 순서를 지정
-                .addPathPatterns("/**")     //인터셉터를 적용할 URL 패턴을 지정
+                .addPathPatterns("/**")     //인터셉터를 적용할 URL패턴을 지정
                 .excludePathPatterns("/css/**", "/*.ico", "/error");    //인터셉터에서 제외할 패턴을 지정
 
         registry.addInterceptor(new LoginCheckInterceptor())
