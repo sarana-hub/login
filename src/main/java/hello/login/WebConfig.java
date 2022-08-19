@@ -24,12 +24,13 @@ public class WebConfig implements WebMvcConfigurer {
         resolvers.add(new LoginMemberArgumentResolver());
     }
 
+    /*addInterceptors()를 사용해서 인터셉터를 등록*/
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new LogInterceptor())
-                .order(1)
-                .addPathPatterns("/**")
-                .excludePathPatterns("/css/**", "/*.ico", "/error");
+        registry.addInterceptor(new LogInterceptor())   //인터셉터를 등록
+                .order(1)   //인터셉터의 호출 순서를 지정
+                .addPathPatterns("/**")     //인터셉터를 적용할 URL 패턴을 지정
+                .excludePathPatterns("/css/**", "/*.ico", "/error");    //인터셉터에서 제외할 패턴을 지정
 
         registry.addInterceptor(new LoginCheckInterceptor())
                 .order(2)
@@ -38,8 +39,9 @@ public class WebConfig implements WebMvcConfigurer {
                         "/css/**", "/*.ico", "/error");
     }
 
+
     /*FilterRegistrationBean을 사용해서 필터를 등록*/
-    @Bean
+    //@Bean    //인터셉터와 필터가 중복되지 않도록 주석처리
     public FilterRegistrationBean logFilter() {
         FilterRegistrationBean<Filter> filterRegistrationBean = new FilterRegistrationBean<>();
         filterRegistrationBean.setFilter(new LogFilter());      //필터를 등록
@@ -51,7 +53,7 @@ public class WebConfig implements WebMvcConfigurer {
         return filterRegistrationBean;
     }
 
-    @Bean
+    //@Bean
     public FilterRegistrationBean loginCheckFilter() {
         FilterRegistrationBean<Filter> filterRegistrationBean = new FilterRegistrationBean<>();
         filterRegistrationBean.setFilter(new LoginCheckFilter());
