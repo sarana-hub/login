@@ -15,6 +15,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import javax.servlet.Filter;
 import java.util.List;
 
+/** 필터 설정*/
+
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
     @Override
@@ -36,12 +38,13 @@ public class WebConfig implements WebMvcConfigurer {
                         "/css/**", "/*.ico", "/error");
     }
 
-   // @Bean
+    /*FilterRegistrationBean을 사용해서 필터를 등록*/
+    @Bean
     public FilterRegistrationBean logFilter() {
         FilterRegistrationBean<Filter> filterRegistrationBean = new FilterRegistrationBean<>();
-        filterRegistrationBean.setFilter(new LogFilter());
-        filterRegistrationBean.setOrder(1);
-        filterRegistrationBean.addUrlPatterns("/*");
+        filterRegistrationBean.setFilter(new LogFilter());      //등록할 필터를 지정
+        filterRegistrationBean.setOrder(1);     //필터는 체인으로 동작하므로, 순서가 필요
+        filterRegistrationBean.addUrlPatterns("/*");    //필터를 적용할 URL패턴을 지정
 
         return filterRegistrationBean;
     }
